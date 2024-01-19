@@ -10,8 +10,8 @@
     "default_title": "Pomodoro Timer"
   },
   "icons": {
-    "48": "icon.png",
-    "128": "icon.png"
+    "48": "pomodoro_48.png",
+    "128": "pomodoro_128.png"
   },
   "permissions": ["activeTab"]
 }
