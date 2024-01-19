@@ -1,66 +1,54 @@
-let timerInterval;
-let isBreak = false;
-let minutes, seconds;
+document.addEventListener('DOMContentLoaded', function () {
+  let timerContainer = document.getElementById('timer');
+  let buttonsContainer = document.getElementById('buttons-container');
+  let tabsContainer = document.getElementById('tabs');
 
-function startTimer() {
-  timerInterval = setInterval(function() {
-    if (seconds > 0) {
-      seconds--;
-    } else if (minutes > 0) {
-      seconds = 59;
-      minutes--;
-    } else {
-      clearInterval(timerInterval);
-      if (isBreak) {
-        startBreak();
-      } else {
-        startLongBreak();
-      }
+  let tabs = {
+    timer: document.getElementById('timer-tab'),
+    insights: document.getElementById('insights-tab'),
+    donate: document.getElementById('donate-tab')
+  };
+
+  let activeTab = 'timer';
+
+  function switchTab(tab) {
+    if (activeTab === tab) return;
+
+    // Hide previous content
+    if (activeTab === 'timer') {
+      timerContainer.style.display = 'none';
+      buttonsContainer.style.display = 'none';
     }
 
-    updateTimerDisplay();
-  }, 1000);
-}
+    // Reset active tab styling
+    tabs[activeTab].classList.remove('active-tab');
 
-function startBreak() {
-  isBreak = false;
-  minutes = 5;
-  seconds = 0;
-  startTimer();
-}
+    // Show new content
+    if (tab === 'timer') {
+      timerContainer.style.display = 'block';
+      buttonsContainer.style.display = 'flex';
+    }
 
-function startLongBreak() {
-  isBreak = true;
-  minutes = 25;
-  seconds = 0;
-  startTimer();
-}
+    // Set new active tab
+    tabs[tab].classList.add('active-tab');
+    activeTab = tab;
+  }
 
-function pauseTimer() {
-  clearInterval(timerInterval);
-}
+  // Initial setup
+  switchTab(activeTab);
 
-function stopTimer() {
-  clearInterval(timerInterval);
-  minutes = 25;
-  seconds = 0;
-  updateTimerDisplay();
-}
+  // Event listeners for tab switching
+  tabs.timer.addEventListener('click', function () {
+    switchTab('timer');
+  });
 
-function updateTimerDisplay() {
-  document.getElementById('minutes').innerText = padNumber(minutes);
-  document.getElementById('seconds').innerText = padNumber(seconds);
-}
+  tabs.insights.addEventListener('click', function () {
+    switchTab('insights');
+    // You can add additional logic for the 'Insights' tab if needed
+  });
 
-function padNumber(num) {
-  return num.toString().padStart(2, '0');
-}
-
-document.getElementById('start').addEventListener('click', startTimer);
-document.getElementById('pause').addEventListener('click', pauseTimer);
-document.getElementById('stop').addEventListener('click', stopTimer);
-
-// Initialize the timer display
-minutes = 25;
-seconds = 0;
-updateTimerDisplay();
+  tabs.donate.addEventListener('click', function () {
+    switchTab('donate');
+    // You can add additional logic for the 'Donate' tab if needed
+  });
+});
