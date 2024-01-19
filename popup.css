@@ -4,12 +4,41 @@ body {
 }
 
 #timer {
-  font-size: 2em;
-  margin: 10px;
+  font-size: 6em; /* Changed to 6 times bigger */
+  margin: 20px; /* Increased margin for better spacing */
 }
 
 button {
   margin: 5px;
   padding: 10px;
   font-size: 1em;
+  border-radius: 10px; /* Added rounded corners */
+}
+
+#buttons-container {
+  display: flex; /* Align buttons horizontally */
+  justify-content: center; /* Center the buttons */
+}
+
+button + button {
+  margin-left: 10px; /* Add space between buttons */
+}
+
+/* New styling for the tabs */
+#tabs {
+  margin-top: 20px;
+}
+
+.tab {
+  display: inline-block;
+  margin: 0 10px;
+  cursor: pointer;
+  font-size: 1.2em;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #ddd;
+}
+
+.tab:hover {
+  background-color: #ccc;
 }
